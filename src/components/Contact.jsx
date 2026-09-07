@@ -35,14 +35,14 @@ export default function Contact() {
               <div className="w-12 h-12 rounded-full glass flex items-center justify-center group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
                 <Mail className="w-5 h-5 text-primary group-hover:text-white transition-colors" />
               </div>
-              <span className="text-lg font-medium">hello@prasanth.dev</span>
+              <span className="text-lg font-medium">thonangiprasanthkumar@gmail.com</span>
             </a>
             
             <a href="tel:+919876543210" className="flex items-center gap-4 text-gray-300 hover:text-white group w-max">
               <div className="w-12 h-12 rounded-full glass flex items-center justify-center group-hover:bg-accent/20 group-hover:scale-110 transition-all duration-300">
                 <Phone className="w-5 h-5 text-accent group-hover:text-white transition-colors" />
               </div>
-              <span className="text-lg font-medium">+91 9876543210</span>
+              <span className="text-lg font-medium">+91 9059518937</span>
             </a>
           </div>
 
