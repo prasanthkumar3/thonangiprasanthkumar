@@ -19,10 +19,9 @@ Vercel detects Vite automatically: build command `npm run build`, output directo
 
 ## Editing the content
 
-Every word on the site lives in `src/data.js` (projects, skills, education, certifications, contact details).
+Almost every word lives in `src/data.js`: projects, skills (and where each one shows up), the timeline, certifications and contact details.
 
-- **Add a project:** copy one object in the `projects` array and change the fields.
-- **Add a screenshot to a project:** put the image in `public/projects/` and set `image: "/projects/your-file.png"` on that project.
-- **Update the resume:** replace `public/Thonangi_Prasanth_Kumar.pdf` with the new file (keep the same name).
-
-Colors and fonts are the variables at the top of `src/styles.css`.
+- **Update the resume:** replace `public/Thonangi_Prasanth_Kumar.pdf`, keeping the same file name.
+- **Change colors and fonts:** the variables at the top of `src/styles/base.css`.
+- **Sections:** each one is a component in `src/components/` with its own stylesheet in `src/styles/`.
+- **Demo data in the project sketches:** the sample teams in `src/components/AvishkaarSketch.jsx` are made up for the demo.

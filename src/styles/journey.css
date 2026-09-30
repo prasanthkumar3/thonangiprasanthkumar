@@ -1,0 +1,143 @@
+.journey {
+  padding-block: clamp(4.5rem, 9vw, 8rem);
+}
+
+.journey__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem 3rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.journey__title {
+  font-size: clamp(2.6rem, 7vw, 6.2rem);
+}
+
+.journey__lead {
+  max-width: 22em;
+  color: var(--ink-soft);
+}
+
+.journey__list {
+  --p: 0;
+  --year-w: clamp(8rem, 16vw, 15rem);
+  --rail-w: 3rem;
+  position: relative;
+}
+
+/* The rail and the magenta line that draws down it as you scroll. */
+.journey__rail,
+.journey__fill {
+  position: absolute;
+  top: 0.9rem;
+  bottom: 0.9rem;
+  left: calc(var(--year-w) + var(--rail-w) / 2 - 1px);
+  width: 2px;
+}
+
+.journey__rail {
+  background: var(--line);
+}
+
+.journey__fill {
+  background: var(--magenta);
+  transform-origin: top center;
+  transform: scaleY(var(--p));
+}
+
+.step {
+  display: grid;
+  grid-template-columns: var(--year-w) var(--rail-w) minmax(0, 1fr);
+  align-items: start;
+  padding-block: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.step__year {
+  padding-right: 1rem;
+  font-size: clamp(1.9rem, 4.2vw, 3.6rem);
+  line-height: 1.05;
+  text-align: right;
+  color: rgba(26, 19, 32, 0.28);
+  transition: color 0.4s ease;
+}
+
+.step__dot {
+  position: relative;
+  z-index: 1;
+  justify-self: center;
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.7rem;
+  border: 2px solid rgba(26, 19, 32, 0.3);
+  border-radius: 50%;
+  background: #fff;
+  transition: background-color 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
+}
+
+.step__body {
+  max-width: 42em;
+  opacity: 0.45;
+  transition: opacity 0.4s ease;
+}
+
+.step.is-passed .step__year {
+  color: var(--ink);
+}
+
+.step.is-passed .step__dot {
+  border-color: var(--magenta);
+  background: var(--magenta);
+  transform: scale(1.15);
+}
+
+.step.is-passed .step__body {
+  opacity: 1;
+}
+
+.step__title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.step__place {
+  margin-top: 0.15rem;
+  color: var(--ink-soft);
+}
+
+.step__text {
+  margin-top: 0.6rem;
+}
+
+@media (max-width: 720px) {
+  .journey__list {
+    --year-w: 0px;
+    --rail-w: 2rem;
+  }
+
+  .step {
+    grid-template-columns: var(--rail-w) minmax(0, 1fr);
+    grid-template-areas:
+      "dot year"
+      ". body";
+    row-gap: 0.25rem;
+  }
+
+  .step__year {
+    grid-area: year;
+    padding-right: 0;
+    font-size: 2rem;
+    text-align: left;
+  }
+
+  .step__dot {
+    grid-area: dot;
+    margin-top: 0.6rem;
+  }
+
+  .step__body {
+    grid-area: body;
+  }
+}

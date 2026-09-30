@@ -1,29 +1,37 @@
-import { beyond, certifications } from "../data";
+import { certifications } from "../data";
+import "../styles/credentials.css";
+
+function Ticket({ cert }) {
+  return (
+    <li className={`ticket${cert.big ? " ticket--big" : ""}`}>
+      <span className="ticket__seal" aria-hidden="true" />
+      <span className="ticket__issuer">{cert.issuer}</span>
+      <span className="ticket__title display">{cert.title}</span>
+    </li>
+  );
+}
 
 export default function Credentials() {
   return (
-    <section className="section section--wash" id="credentials" aria-labelledby="credentials-title">
-      <div className="wrap section__grid">
-        <h2 className="section__title" id="credentials-title">
+    <section className="creds" id="credentials" aria-labelledby="creds-title">
+      <div className="wrap creds__head">
+        <h2 className="creds__title display" id="creds-title">
           Certifications
         </h2>
-        <div className="section__body credentials">
-          <ul className="certs">
-            {certifications.map((cert) => (
-              <li key={cert.title}>
-                <span className="certs__title">{cert.title}</span>
-                <span className="certs__issuer">{cert.issuer}</span>
-              </li>
-            ))}
-          </ul>
+        <p className="creds__lead">Seven certificates and courses, across cloud, C, machine learning and security.</p>
+      </div>
 
-          <div className="beyond">
-            <h3 className="beyond__heading">Outside the code</h3>
-            {beyond.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-          </div>
-        </div>
+      <div className="creds__track" tabIndex={0} aria-label="Certifications, scrolls automatically">
+        <ul className="creds__row">
+          {certifications.map((cert) => (
+            <Ticket key={cert.title} cert={cert} />
+          ))}
+        </ul>
+        <ul className="creds__row creds__row--copy" aria-hidden="true">
+          {certifications.map((cert) => (
+            <Ticket key={cert.title} cert={cert} />
+          ))}
+        </ul>
       </div>
     </section>
   );

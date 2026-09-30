@@ -1,5 +1,9 @@
 import { Fragment } from "react";
 import { projects } from "../data";
+import AvishkaarSketch from "./AvishkaarSketch";
+import TechnoSketch from "./TechnoSketch";
+import CountUp from "./CountUp";
+import "../styles/work.css";
 
 // Let long addresses wrap at the dots instead of mid-word.
 function breakable(label) {
@@ -16,94 +20,112 @@ function breakable(label) {
   ));
 }
 
-function Project({ project }) {
-  const { name, kind, year, role, url, urlLabel, summary, built, stack, figures, image } = project;
-
+function Details({ project, children }) {
   return (
-    <article className="project">
-      <header className="project__head">
-        <h3 className="project__name">
-          <a href={url} target="_blank" rel="noreferrer">
-            {name}
-          </a>
-        </h3>
-        <p className="project__kind">{kind}</p>
-      </header>
-
-      {image && (
-        <figure className="project__shot">
-          <img src={image} alt={`Screenshot of the ${name} website`} loading="lazy" />
-        </figure>
-      )}
-
-      <div className="project__grid">
-        <div className="project__main">
-          <p className="project__summary">{summary}</p>
-          <ul className="project__built">
-            {built.map((line) => (
-              <li key={line}>{line}</li>
-            ))}
-          </ul>
-        </div>
-
-        <aside className="project__side">
-          <dl className="facts">
+    <div className="details">
+      <p className="details__summary">{project.summary}</p>
+      <ul className="details__built">
+        {project.built.map((line) => (
+          <li key={line}>{line}</li>
+        ))}
+      </ul>
+      <aside className="details__side">
+        <dl className="facts">
+          <div>
+            <dt>Year</dt>
+            <dd>{project.year}</dd>
+          </div>
+          <div>
+            <dt>Role</dt>
+            <dd>{project.role}</dd>
+          </div>
+          {project.stack && (
             <div>
-              <dt>Year</dt>
-              <dd>{year}</dd>
+              <dt>Built with</dt>
+              <dd>{project.stack}</dd>
             </div>
-            <div>
-              <dt>Role</dt>
-              <dd>{role}</dd>
-            </div>
-            {stack && (
-              <div>
-                <dt>Built with</dt>
-                <dd>{stack}</dd>
-              </div>
-            )}
-            <div>
-              <dt>Live site</dt>
-              <dd>
-                <a className="textlink" href={url} target="_blank" rel="noreferrer">
-                  {breakable(urlLabel)}
-                </a>
-              </dd>
-            </div>
-          </dl>
-
-          <ul className="figures">
-            {figures.map((figure) => (
-              <li key={figure.label}>
-                <span className="figures__value">{figure.value}</span>
-                <span className="figures__label">{figure.label}</span>
-              </li>
-            ))}
-          </ul>
-        </aside>
-      </div>
-    </article>
+          )}
+          <div>
+            <dt>Live site</dt>
+            <dd>
+              <a className="textlink" href={project.url} target="_blank" rel="noreferrer">
+                {breakable(project.urlLabel)}
+              </a>
+            </dd>
+          </div>
+        </dl>
+        {children}
+      </aside>
+    </div>
   );
 }
 
 export default function Work() {
+  const { avishkaar, techno } = projects;
+
   return (
-    <section className="section" id="work" aria-labelledby="work-title">
-      <div className="wrap section__grid">
-        <h2 className="section__title" id="work-title">
-          Selected work
-        </h2>
-        <div className="section__body">
-          <p className="statement">
-            Both sites went live for real events with real dates. I built them, and I stayed on to
-            keep them running.
+    <section className="work" id="work" aria-labelledby="work-title">
+      <div className="wrap">
+        <header className="work__head">
+          <h2 className="work__title display" id="work-title">
+            Two sites for two real events.
+          </h2>
+          <p className="work__lead">
+            I built both and stayed on to keep them running. Below are working sketches of what they
+            do, so you can try the flow instead of reading about it.
           </p>
-          <div className="projects">
-            {projects.map((project) => (
-              <Project key={project.name} project={project} />
-            ))}
+        </header>
+
+        <article className="stage stage--one">
+          <header className="stage__head">
+            <div>
+              <h3 className="stage__name display">
+                <a href={avishkaar.url} target="_blank" rel="noreferrer">
+                  {avishkaar.name}
+                </a>
+              </h3>
+              <p className="stage__kind">{avishkaar.kind}</p>
+            </div>
+            <p className="stage__hint">Register a team, then open the organizer view and the API log.</p>
+          </header>
+          <div className="stage__backdrop">
+            <AvishkaarSketch />
           </div>
-        </div>
+          <Details project={avishkaar} />
+        </article>
+
+        <article className="stage stage--two">
+          <header className="stage__head">
+            <div>
+              <h3 className="stage__name display">
+                <a href={techno.url} target="_blank" rel="noreferrer">
+                  {techno.name}
+                </a>
+              </h3>
+              <p className="stage__kind">{techno.kind}</p>
+            </div>
+            <p className="stage__hint">Drag the slider to see the layout adapt from phone to laptop.</p>
+          </header>
+          <div className="stage__backdrop">
+            <TechnoSketch />
+          </div>
+          <Details project={techno}>
+            <ul className="figures">
+              <li>
+                <span className="figures__value display">
+                  <CountUp to={290} suffix="+" />
+                </span>
+                <span className="figures__label">participants</span>
+              </li>
+              <li>
+                <span className="figures__value display">
+                  <CountUp to={90} suffix="+" />
+                </span>
+                <span className="figures__label">teams</span>
+              </li>
+            </ul>
+          </Details>
+        </article>
       </div>
     </section>
   );

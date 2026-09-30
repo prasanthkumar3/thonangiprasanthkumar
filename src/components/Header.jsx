@@ -1,24 +1,44 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { nav, person } from "../data";
+import "../styles/header.css";
 
 export default function Header() {
-  const [stuck, setStuck] = useState(() => typeof window !== "undefined" && window.scrollY > 12);
+  const ref = useRef(null);
 
   useEffect(() => {
-    const onScroll = () => setStuck(window.scrollY > 12);
+    const el = ref.current;
+    let raf = 0;
+
+    const update = () => {
+      raf = 0;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = max > 0 ? Math.min(1, window.scrollY / max) : 0;
+      el.style.setProperty("--progress", progress.toFixed(4));
+      el.classList.toggle("is-stuck", window.scrollY > 12);
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+
+    update();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
   }, []);
 
   return (
-    <header className={`header${stuck ? " is-stuck" : ""}`}>
+    <header className="header" ref={ref}>
       <div className="wrap header__inner">
         <a className="header__mark" href="#top" aria-label="Back to top">
           Prasanth Kumar
         </a>
         <nav className="header__nav" aria-label="Primary">
           {nav.map((item) => (
-            <a key={item.href} href={item.href}>
+            <a key={item.href} href={item.href} className="header__link">
               {item.label}
             </a>
           ))}
@@ -27,6 +47,7 @@ export default function Header() {
           </a>
         </nav>
       </div>
+      <div className="header__progress" aria-hidden="true" />
     </header>
   );
 }

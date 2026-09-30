@@ -1,8 +1,9 @@
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Work from "./components/Work";
-import Skills from "./components/Skills";
-import Background from "./components/Background";
+import Stack from "./components/Stack";
+import Creative from "./components/Creative";
+import Journey from "./components/Journey";
 import Credentials from "./components/Credentials";
 import Contact from "./components/Contact";
 
@@ -16,8 +17,9 @@ export default function App() {
       <main>
         <Hero />
         <Work />
-        <Skills />
-        <Background />
+        <Stack />
+        <Creative />
+        <Journey />
         <Credentials />
       </main>
       <Contact />
