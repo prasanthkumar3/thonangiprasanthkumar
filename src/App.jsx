@@ -6,6 +6,8 @@ import Creative from "./components/Creative";
 import Journey from "./components/Journey";
 import Credentials from "./components/Credentials";
 import Contact from "./components/Contact";
+// Loaded last so the surface treatments sit on top of each section's base styles.
+import "./styles/surfaces.css";
 
 export default function App() {
   return (

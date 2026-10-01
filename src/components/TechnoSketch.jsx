@@ -31,9 +31,9 @@ export default function TechnoSketch() {
   const w = Math.min(width, limit);
 
   return (
-    <div className="sketch">
-      <div className="sketch__bar">
-        <span className="sketch__url">Sketch of the responsive layout, drag to resize</span>
+    <div className="sketch sketch--light">
+      <div className="sketch__bar sketch__bar--title">
+        <p className="sketch__title">Sketch of the responsive layout. Drag the slider to resize the screen.</p>
       </div>
 
       <div className="resp__control">

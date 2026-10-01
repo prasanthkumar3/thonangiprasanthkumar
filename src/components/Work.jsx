@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { projects } from "../data";
 import AvishkaarSketch from "./AvishkaarSketch";
+import ExamForgeSketch from "./ExamForgeSketch";
 import TechnoSketch from "./TechnoSketch";
 import CountUp from "./CountUp";
 import "../styles/work.css";
@@ -60,56 +61,54 @@ function Details({ project, children }) {
   );
 }
 
+function Stage({ id, project, hint, children, extra }) {
+  return (
+    <article className={`stage stage--${id}`}>
+      <header className="stage__head">
+        <div>
+          <h3 className="stage__name display">
+            <a href={project.url} target="_blank" rel="noreferrer">
+              {project.name}
+            </a>
+          </h3>
+          <p className="stage__kind">{project.kind}</p>
+        </div>
+        <p className="stage__hint">{hint}</p>
+      </header>
+      <div className="stage__backdrop">{children}</div>
+      <Details project={project}>{extra}</Details>
+    </article>
+  );
+}
+
 export default function Work() {
-  const { avishkaar, techno } = projects;
+  const { avishkaar, examforge, techno } = projects;
 
   return (
     <section className="work" id="work" aria-labelledby="work-title">
       <div className="wrap">
         <header className="work__head">
           <h2 className="work__title display" id="work-title">
-            Two sites for two real events.
+            Three sites, built for real events and real exams.
           </h2>
           <p className="work__lead">
-            I built both and stayed on to keep them running. Below are working sketches of what they
-            do, so you can try the flow instead of reading about it.
+            Each one below is a working sketch of the real thing, so you can try the flow instead of reading about it.
           </p>
         </header>
 
-        <article className="stage stage--one">
-          <header className="stage__head">
-            <div>
-              <h3 className="stage__name display">
-                <a href={avishkaar.url} target="_blank" rel="noreferrer">
-                  {avishkaar.name}
-                </a>
-              </h3>
-              <p className="stage__kind">{avishkaar.kind}</p>
-            </div>
-            <p className="stage__hint">Register a team, then open the organizer view and the API log.</p>
-          </header>
-          <div className="stage__backdrop">
-            <AvishkaarSketch />
-          </div>
-          <Details project={avishkaar} />
-        </article>
+        <Stage id="avishkaar" project={avishkaar} hint="Sign in, open the team overview, edit a member, download an ID card, then check the API log.">
+          <AvishkaarSketch />
+        </Stage>
 
-        <article className="stage stage--two">
-          <header className="stage__head">
-            <div>
-              <h3 className="stage__name display">
-                <a href={techno.url} target="_blank" rel="noreferrer">
-                  {techno.name}
-                </a>
-              </h3>
-              <p className="stage__kind">{techno.kind}</p>
-            </div>
-            <p className="stage__hint">Drag the slider to see the layout adapt from phone to laptop.</p>
-          </header>
-          <div className="stage__backdrop">
-            <TechnoSketch />
-          </div>
-          <Details project={techno}>
+        <Stage id="examforge" project={examforge} hint="Take the demo exam for an instant score, or publish your own as an examiner.">
+          <ExamForgeSketch />
+        </Stage>
+
+        <Stage
+          id="techno"
+          project={techno}
+          hint="Drag the slider to see the layout adapt from phone to laptop."
+          extra={
             <ul className="figures">
               <li>
                 <span className="figures__value display">
@@ -124,8 +123,10 @@ export default function Work() {
                 <span className="figures__label">teams</span>
               </li>
             </ul>
-          </Details>
-        </article>
+          }
+        >
+          <TechnoSketch />
+        </Stage>
       </div>
     </section>
   );

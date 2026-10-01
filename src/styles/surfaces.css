@@ -1,0 +1,136 @@
+/* Premium surfaces: fine grain, soft light, and a faint grid.
+   Everything here is decoration and sits behind the content. */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background-image: var(--grain);
+  opacity: 0.1;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* ---- Hero ---- */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background:
+    radial-gradient(48% 55% at 88% 4%, rgba(255, 0, 127, 0.14), transparent 70%),
+    radial-gradient(45% 55% at 0% 96%, rgba(255, 150, 196, 0.2), transparent 70%),
+    radial-gradient(60% 50% at 50% 0%, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0) 70%),
+    #fffdfe;
+}
+
+.hero__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(26, 19, 32, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26, 19, 32, 0.07) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 85% 75% at 55% 35%, #000 25%, transparent 78%);
+  mask-image: radial-gradient(ellipse 85% 75% at 55% 35%, #000 25%, transparent 78%);
+}
+
+.hero__grid--lit {
+  background-image:
+    linear-gradient(rgba(255, 0, 127, 0.55) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 0, 127, 0.55) 1px, transparent 1px);
+  -webkit-mask-image: radial-gradient(circle 190px at var(--gx, -400px) var(--gy, -400px), #000, transparent);
+  mask-image: radial-gradient(circle 190px at var(--gx, -400px) var(--gy, -400px), #000, transparent);
+}
+
+.hero .wrap {
+  position: relative;
+}
+
+/* ---- Work ---- */
+.work {
+  isolation: isolate;
+}
+
+.work::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 42rem;
+  z-index: -1;
+  background: radial-gradient(45% 55% at 92% 0%, rgba(255, 0, 127, 0.07), transparent 70%);
+  pointer-events: none;
+}
+
+/* ---- Stack (dark) ---- */
+.stack {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(55% 55% at 100% 0%, rgba(255, 0, 127, 0.2), transparent 62%),
+    radial-gradient(45% 50% at 0% 100%, rgba(255, 255, 255, 0.07), transparent 70%),
+    var(--ink);
+}
+
+.stack::before,
+.contact::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 70% 30%, #000 10%, transparent 75%);
+  mask-image: radial-gradient(ellipse 80% 70% at 70% 30%, #000 10%, transparent 75%);
+  pointer-events: none;
+}
+
+/* ---- Creative (blush) ---- */
+.creative {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(50% 45% at 0% 0%, #ffffff, transparent 70%),
+    radial-gradient(45% 50% at 100% 100%, rgba(255, 0, 127, 0.11), transparent 70%),
+    var(--blush);
+}
+
+/* ---- Journey (white, dotted) ---- */
+.journey {
+  position: relative;
+  isolation: isolate;
+}
+
+.journey::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(rgba(26, 19, 32, 0.14) 1px, transparent 1.4px) 0 0 / 26px 26px;
+  -webkit-mask-image: linear-gradient(transparent, #000 14%, #000 86%, transparent);
+  mask-image: linear-gradient(transparent, #000 14%, #000 86%, transparent);
+  pointer-events: none;
+}
+
+/* ---- Certifications (wash) ---- */
+.creds {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(50% 60% at 15% 0%, rgba(255, 255, 255, 0.9), transparent 70%),
+    radial-gradient(45% 55% at 100% 100%, rgba(255, 0, 127, 0.07), transparent 70%),
+    var(--wash);
+}
+
+/* ---- Contact (dark) ---- */
+.contact {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(50% 55% at 0% 100%, rgba(255, 0, 127, 0.22), transparent 62%),
+    radial-gradient(45% 50% at 100% 0%, rgba(255, 255, 255, 0.06), transparent 70%),
+    var(--ink);
+}

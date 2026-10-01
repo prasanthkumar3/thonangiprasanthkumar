@@ -1,4 +1,5 @@
 .work {
+  position: relative;
   padding-block: clamp(4.5rem, 9vw, 8rem);
 }
 
@@ -72,31 +73,68 @@
 .stage__backdrop {
   position: relative;
   padding: clamp(1rem, 3.5vw, 3rem);
-  border-radius: 24px;
+  border-radius: 28px;
   overflow: hidden;
+  isolation: isolate;
 }
 
-.stage--one .stage__backdrop {
+/* Fine grain over every stage so the flat colors feel printed, not painted. */
+.stage__backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: var(--grain);
+  opacity: 0.28;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.stage--avishkaar .stage__backdrop {
   background:
-    radial-gradient(60% 80% at 100% 0%, var(--blush-deep), transparent 70%),
-    var(--blush);
+    radial-gradient(55% 70% at 100% 0%, rgba(255, 0, 127, 0.16), transparent 70%),
+    radial-gradient(60% 80% at 0% 100%, rgba(34, 211, 238, 0.14), transparent 70%),
+    linear-gradient(180deg, #ffeaf4, #fff5fa);
 }
 
-.stage--two .stage__backdrop {
+.stage--examforge .stage__backdrop {
   background:
-    radial-gradient(60% 80% at 0% 100%, #e9e3f2, transparent 70%),
-    var(--wash);
+    radial-gradient(55% 70% at 0% 0%, rgba(37, 99, 235, 0.13), transparent 70%),
+    radial-gradient(60% 80% at 100% 100%, rgba(255, 0, 127, 0.1), transparent 70%),
+    linear-gradient(180deg, #edf2fc, #f7f9fe);
 }
 
-/* ---- Browser-like sketch panel ---- */
+.stage--techno .stage__backdrop {
+  background:
+    radial-gradient(60% 80% at 0% 100%, rgba(120, 90, 190, 0.14), transparent 70%),
+    radial-gradient(50% 70% at 100% 0%, rgba(255, 0, 127, 0.08), transparent 70%),
+    linear-gradient(180deg, #f1eef7, #f8f6fb);
+}
+
+/* ---- Shared sketch shell ---- */
 .sketch {
-  max-width: 880px;
+  --sk-bg: #fff;
+  --sk-fg: var(--ink);
+  --sk-mute: var(--ink-soft);
+  --sk-line: var(--line);
+  --sk-pre: var(--ink);
+  max-width: 940px;
   margin-inline: auto;
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: 16px;
+  background: var(--sk-bg);
+  color: var(--sk-fg);
+  border: 1px solid var(--sk-line);
+  border-radius: 18px;
   box-shadow: var(--shadow-lift);
   overflow: hidden;
+}
+
+.sketch--dark {
+  --sk-bg: #050b18;
+  --sk-fg: #e6eefc;
+  --sk-mute: rgba(230, 238, 252, 0.62);
+  --sk-line: rgba(56, 189, 248, 0.22);
+  --sk-pre: #020617;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06), 0 40px 80px -30px rgba(3, 12, 40, 0.75), 0 0 0 1px rgba(56, 189, 248, 0.12);
 }
 
 .sketch__bar {
@@ -104,38 +142,47 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  min-height: 2.9rem;
-  padding: 0.5rem 1rem;
-  background: var(--wash);
-  border-bottom: 1px solid var(--line);
-  font-size: 0.85rem;
-  color: var(--ink-soft);
+  padding: 0.55rem 0.9rem 0;
+  border-bottom: 1px solid var(--sk-line);
 }
 
-.sketch__url {
-  min-width: 0;
+.sketch__body {
+  padding: 0;
+}
+
+.sketch__body [hidden] {
+  display: none !important;
+}
+
+.sketch__note {
+  padding: 0.8rem 1rem 0.95rem;
+  border-top: 1px solid var(--sk-line);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--sk-mute);
 }
 
 .sketch__reset {
+  margin-bottom: 0.55rem;
   padding: 0.3rem 0.85rem;
-  border: 1px solid var(--line);
+  border: 1px solid var(--sk-line);
   border-radius: 999px;
-  background: #fff;
+  background: transparent;
   font-size: 0.82rem;
+  color: var(--sk-fg);
   cursor: pointer;
+  white-space: nowrap;
   transition: border-color 0.2s ease, color 0.2s ease;
 }
 
 .sketch__reset:hover {
-  border-color: var(--magenta-deep);
-  color: var(--magenta-deep);
+  border-color: var(--magenta);
+  color: var(--magenta);
 }
 
 .tabs {
   display: flex;
-  gap: 0.25rem;
-  padding: 0.6rem 0.75rem 0;
-  border-bottom: 1px solid var(--line);
+  gap: 0.15rem;
   overflow-x: auto;
 }
 
@@ -144,25 +191,29 @@
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  padding: 0.6rem 0.9rem 0.75rem;
+  padding: 0.6rem 0.85rem 0.75rem;
   border: 0;
   background: transparent;
-  font-size: 0.95rem;
+  font-size: 0.93rem;
   font-weight: 500;
-  color: var(--ink-soft);
+  color: var(--sk-mute);
   white-space: nowrap;
   cursor: pointer;
 }
 
+.tabs__tab:hover {
+  color: var(--sk-fg);
+}
+
 .tabs__tab[aria-selected="true"] {
-  color: var(--ink);
+  color: var(--sk-fg);
 }
 
 .tabs__tab[aria-selected="true"]::after {
   content: "";
   position: absolute;
-  left: 0.9rem;
-  right: 0.9rem;
+  left: 0.85rem;
+  right: 0.85rem;
   bottom: -1px;
   height: 2px;
   background: var(--magenta);
@@ -172,7 +223,7 @@
   min-width: 1.3rem;
   padding: 0.05rem 0.4rem;
   border-radius: 999px;
-  background: var(--ink);
+  background: var(--magenta-deep);
   color: #fff;
   font-size: 0.72rem;
   line-height: 1.5;
@@ -181,274 +232,69 @@
 
 .panel {
   padding: clamp(1.1rem, 3vw, 1.9rem);
-  min-height: 24rem;
+  min-height: 26rem;
 }
 
-/* ---- Register form ---- */
-.reg {
-  display: grid;
-  gap: 1.35rem;
-  max-width: 34rem;
+/* ---- Browser frame ---- */
+.browser__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.55rem 0.8rem;
+  font-size: 0.82rem;
 }
 
-.field {
-  border: 0;
+.browser--dark .browser__bar {
+  background: #0b1a1f;
+  color: #a9c1c8;
+}
+
+.browser--light .browser__bar {
+  background: #eef0f4;
+  color: #5b6472;
+}
+
+.browser__nav {
+  letter-spacing: 0.35em;
+  opacity: 0.7;
+}
+
+.browser__url {
+  flex: 1;
   min-width: 0;
+  padding: 0.28rem 0.9rem;
+  border-radius: 999px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.field label,
-.field legend,
-.field__label {
-  display: block;
-  padding: 0;
-  margin-bottom: 0.45rem;
-  font-size: 0.85rem;
-  font-weight: 600;
+.browser--dark .browser__url {
+  background: #12292f;
 }
 
-.field > input {
-  width: 100%;
-  padding: 0.75rem 0.9rem;
-  border: 1px solid rgba(26, 19, 32, 0.25);
-  border-radius: 10px;
+.browser--light .browser__url {
   background: #fff;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #dde1e8;
 }
 
-.field > input:focus {
-  outline: none;
-  border-color: var(--ink);
-  box-shadow: 0 0 0 3px rgba(255, 0, 127, 0.22);
-}
-
-.seg {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-
-.seg label {
+.browser__screen {
   position: relative;
-  margin: 0;
-  padding: 0.45rem 1rem;
-  border: 1px solid rgba(26, 19, 32, 0.25);
-  border-radius: 999px;
-  font-size: 0.92rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  height: 34rem;
+  container-type: size;
+  container-name: screen;
 }
 
-.seg label:hover {
-  border-color: var(--ink);
+.browser__scroll {
+  height: 100%;
+  overflow: auto;
+  overscroll-behavior: contain;
 }
 
-.seg label.is-on {
-  background: var(--ink);
-  border-color: var(--ink);
-  color: #fff;
-}
-
-.seg input {
-  position: absolute;
-  opacity: 0;
-  inset: 0;
-  cursor: pointer;
-}
-
-.seg label:has(input:focus-visible) {
-  outline: 2px solid var(--magenta-deep);
-  outline-offset: 3px;
-}
-
-.reg__row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.35rem 2.5rem;
-}
-
-.stepper {
-  display: inline-flex;
-  align-items: center;
-  border: 1px solid rgba(26, 19, 32, 0.25);
-  border-radius: 999px;
-}
-
-.stepper button {
-  width: 2.5rem;
-  height: 2.5rem;
-  border: 0;
-  border-radius: 50%;
-  background: transparent;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-
-.stepper button:hover {
-  color: var(--magenta-deep);
-}
-
-.stepper output {
-  min-width: 2rem;
-  font-weight: 600;
-  text-align: center;
-}
-
-.reg__submit {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1rem 1.25rem;
-}
-
-.note {
-  font-size: 0.92rem;
-  line-height: 1.45;
-}
-
-.note--ok {
-  color: var(--ink);
-}
-
-.note--ok::before {
-  content: "";
-  display: inline-block;
-  width: 0.55rem;
-  height: 0.55rem;
-  margin-right: 0.5rem;
-  border-radius: 50%;
-  background: var(--magenta);
-}
-
-.note--error {
-  color: var(--magenta-deep);
-}
-
-/* ---- Organizer view ---- */
-.stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem 2.75rem;
-}
-
-.stats strong {
-  display: block;
-  font-family: var(--display);
-  font-weight: 500;
-  font-size: 2.6rem;
-  line-height: 1;
-  letter-spacing: -0.03em;
-}
-
-.stats span {
-  font-size: 0.85rem;
-  color: var(--ink-soft);
-}
-
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-top: 1.4rem;
-}
-
-.chips button {
-  padding: 0.35rem 0.9rem;
-  border: 1px solid rgba(26, 19, 32, 0.25);
-  border-radius: 999px;
-  background: #fff;
-  font-size: 0.88rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-}
-
-.chips button:hover {
-  border-color: var(--ink);
-}
-
-.chips button.is-on {
-  background: var(--ink);
-  border-color: var(--ink);
-  color: #fff;
-}
-
-.table {
-  margin-top: 1.1rem;
-  font-size: 0.95rem;
-}
-
-.table__head,
-.table__row {
-  display: grid;
-  grid-template-columns: minmax(0, 2.2fr) 1fr 1fr 0.9fr 1.3fr;
-  gap: 0.75rem;
-  align-items: center;
-  padding-block: 0.75rem;
-  border-top: 1px solid var(--line);
-}
-
-.table__head {
-  font-size: 0.8rem;
-  color: var(--ink-soft);
-  border-top: 0;
-  padding-block: 0.35rem;
-}
-
-.table__name {
-  font-weight: 600;
-  overflow-wrap: anywhere;
-}
-
-.table__empty {
-  padding-block: 1.2rem;
-  border-top: 1px solid var(--line);
-  color: var(--ink-soft);
-}
-
-.status {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.28rem 0.8rem 0.28rem 0.65rem;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: #fff;
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: border-color 0.2s ease;
-}
-
-.status::before {
-  content: "";
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%;
-  background: #c9c3d0;
-}
-
-.status.is-on::before {
-  background: var(--magenta);
-}
-
-.status:hover {
-  border-color: var(--ink);
-}
-
-@media (max-width: 600px) {
-  .table__head,
-  .table__row {
-    grid-template-columns: minmax(0, 1.8fr) 0.9fr 1.4fr;
-  }
-
-  .hide-sm {
-    display: none;
-  }
-}
-
-/* ---- API log ---- */
+/* ---- Request log (works on light and dark sketches) ---- */
 .api__empty {
   max-width: 28em;
-  color: var(--ink-soft);
+  color: var(--sk-mute);
 }
 
 .api__line {
@@ -464,8 +310,8 @@
 .api__method {
   padding: 0.12rem 0.55rem;
   border-radius: 6px;
-  background: var(--ink);
-  color: #fff;
+  background: var(--sk-fg);
+  color: var(--sk-bg);
   font-size: 0.8rem;
   font-weight: 600;
 }
@@ -485,7 +331,7 @@
 }
 
 .api__status.is-bad::before {
-  background: var(--ink);
+  background: #f59e0b;
 }
 
 .api__grid {
@@ -498,15 +344,16 @@
 .api__label {
   margin-bottom: 0.4rem;
   font-size: 0.8rem;
-  color: var(--ink-soft);
+  color: var(--sk-mute);
 }
 
 .api__grid pre {
   margin: 0;
   padding: 1rem;
   min-height: 9rem;
+  border: 1px solid var(--sk-line);
   border-radius: 10px;
-  background: var(--ink);
+  background: var(--sk-pre);
   color: #f4eef8;
   font-family: var(--code);
   font-size: 0.82rem;
@@ -518,7 +365,7 @@
   margin-top: 1.4rem;
   font-family: var(--code);
   font-size: 0.85rem;
-  color: var(--ink-soft);
+  color: var(--sk-mute);
 }
 
 .api__history li {
@@ -527,7 +374,7 @@
   align-items: center;
   gap: 0.6rem;
   padding-block: 0.5rem;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--sk-line);
 }
 
 @media (max-width: 640px) {
@@ -536,14 +383,14 @@
   }
 }
 
-/* ---- Responsive resizer ---- */
+/* ---- Responsive resizer (Techno Vision) ---- */
 .resp__control {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem 1.1rem;
   padding: 0.9rem clamp(1rem, 3vw, 1.9rem);
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--sk-line);
   font-size: 0.9rem;
 }
 
@@ -744,10 +591,7 @@
 @container site (min-width: 700px) {
   .mock__nav,
   .mock__hero,
-  .mock__stats {
-    padding-inline: 1.75rem;
-  }
-
+  .mock__stats,
   .mock__days {
     padding-inline: 1.75rem;
   }
@@ -870,4 +714,10 @@
       "built"
       "side";
   }
+}
+
+.sketch__title {
+  padding-block: 0.8rem;
+  font-size: 0.88rem;
+  color: var(--sk-mute);
 }

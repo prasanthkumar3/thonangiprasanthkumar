@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export function usePrefersReducedMotion() {
   const query = "(prefers-reduced-motion: reduce)";
@@ -42,4 +42,19 @@ export function useInView(threshold = 0.4) {
   }, [threshold]);
 
   return [ref, inView];
+}
+
+// A tiny request log used by the project sketches to show the API calls behind each action.
+export function useRequestLog() {
+  const [log, setLog] = useState([]);
+  const counter = useRef(0);
+
+  const record = useCallback((method, path, status, request, response) => {
+    counter.current += 1;
+    const id = counter.current;
+    setLog((prev) => [{ id, method, path, status, request, response }, ...prev].slice(0, 12));
+  }, []);
+
+  const clear = useCallback(() => setLog([]), []);
+  return { log, record, clear };
 }

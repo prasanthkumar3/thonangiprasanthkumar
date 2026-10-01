@@ -99,16 +99,21 @@ function RippleName({ ready }) {
 function Collage() {
   return (
     <div className="collage" aria-hidden="true">
-      <div className="frag frag--form">
-        <p className="frag__title">Register your team</p>
-        <div className="frag__input">Byte Bandits</div>
-        <div className="frag__chips">
-          <span className="is-on">AI</span>
-          <span>Web3</span>
-          <span>IoT</span>
-          <span>Robotics</span>
+      <div className="frag frag--av">
+        <p className="frag__eyebrow">TEAM OVERVIEW</p>
+        <p className="frag__team">Team : NULL POINTERS</p>
+        <span className="frag__pill">Team-ID: AVI-A3-40817</span>
+        <div className="frag__member">
+          <span className="frag__avatar">AM</span>
+          <div>
+            <b>Aarav Menon</b>
+            <i>Team Lead</i>
+          </div>
         </div>
-        <div className="frag__submit">Submit team</div>
+        <div className="frag__btns">
+          <span>Edit Details</span>
+          <span className="is-green">Download ID Card</span>
+        </div>
       </div>
 
       <div className="frag frag--phone">
@@ -122,22 +127,13 @@ function Collage() {
         </div>
       </div>
 
-      <div className="frag frag--table">
-        <p className="frag__title">Organizer view</p>
-        <ul>
-          <li>
-            <span>Null Pointers</span>
-            <em className="pill pill--on">Confirmed</em>
-          </li>
-          <li>
-            <span>Loopback</span>
-            <em className="pill">Pending</em>
-          </li>
-          <li>
-            <span>Deep Ocean Crew</span>
-            <em className="pill pill--on">Confirmed</em>
-          </li>
-        </ul>
+      <div className="frag frag--ef">
+        <div className="frag__brand">
+          <span>E</span>ExamForge
+        </div>
+        <p className="frag__ef-title">Take an exam</p>
+        <div className="frag__ef-input">PYTHON26X</div>
+        <div className="frag__ef-btn">Continue &rarr;</div>
       </div>
     </div>
   );
@@ -161,12 +157,16 @@ export default function Hero() {
       raf = 0;
       el.style.setProperty("--mx", next.x.toFixed(3));
       el.style.setProperty("--my", next.y.toFixed(3));
+      el.style.setProperty("--gx", `${next.px}px`);
+      el.style.setProperty("--gy", `${next.py}px`);
     };
     const onMove = (e) => {
       const r = el.getBoundingClientRect();
       next = {
         x: Math.max(-1, Math.min(1, ((e.clientX - r.left) / r.width) * 2 - 1)),
         y: Math.max(-1, Math.min(1, ((e.clientY - r.top) / r.height) * 2 - 1)),
+        px: Math.round(e.clientX - r.left),
+        py: Math.round(e.clientY - r.top),
       };
       if (!raf) raf = requestAnimationFrame(apply);
     };
@@ -179,6 +179,10 @@ export default function Hero() {
 
   return (
     <section className={`hero${ready ? " is-ready" : ""}`} id="top" ref={heroRef}>
+      <div className="hero__bg" aria-hidden="true">
+        <span className="hero__grid" />
+        <span className="hero__grid hero__grid--lit" />
+      </div>
       <div className="wrap">
         <p className="hero__status">
           <span className="hero__dot" aria-hidden="true" />

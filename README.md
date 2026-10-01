@@ -17,11 +17,11 @@ npm run build
 
 Vercel detects Vite automatically: build command `npm run build`, output directory `dist`.
 
-## Editing the content
+## Where to change things
 
-Almost every word lives in `src/data.js`: projects, skills (and where each one shows up), the timeline, certifications and contact details.
-
-- **Update the resume:** replace `public/Thonangi_Prasanth_Kumar.pdf`, keeping the same file name.
-- **Change colors and fonts:** the variables at the top of `src/styles/base.css`.
-- **Sections:** each one is a component in `src/components/` with its own stylesheet in `src/styles/`.
-- **Demo data in the project sketches:** the sample teams in `src/components/AvishkaarSketch.jsx` are made up for the demo.
+- **Text, projects, skills, links:** `src/data.js`
+- **Journey timeline bars:** the `CLIPS` list at the top of `src/components/Journey.jsx` (dates are decimal years, notes are in the comment above it)
+- **Project sketches:** `AvishkaarSketch.jsx`, `ExamForgeSketch.jsx`, `TechnoSketch.jsx` in `src/components/`. All names, emails and exam questions in them are made-up sample data.
+- **Colors and fonts:** the variables at the top of `src/styles/base.css`
+- **Backgrounds:** `src/styles/surfaces.css`
+- **Resume:** replace `public/Thonangi_Prasanth_Kumar.pdf`, keeping the same file name

@@ -23,21 +23,39 @@ export const nav = [
 export const projects = {
   avishkaar: {
     name: "AVISHKAAR",
-    kind: "National-level hackathon website",
+    kind: "National-level hackathon platform",
     year: "2025",
     role: "Full-stack developer",
     url: "https://avishkaar.co",
     urlLabel: "avishkaar.co",
     summary:
-      "Avishkaar Season 4 is AITAM's national innovation hackathon, a 48-hour challenge across AI, Web3, IoT and Robotics. I designed and built the full-stack platform behind it, from the public event pages to the dashboards organizers used while the event was running.",
+      "Avishkaar Season 4 is AITAM's national innovation hackathon, a 48-hour challenge across AI, Web3, IoT and Robotics. I designed and built the full-stack platform behind it: the public event pages, the team portal participants used, and the dashboards organizers ran the event from.",
     built: [
       "Team registration and participant management",
-      "Event listings on a responsive public site",
-      "Admin dashboards for organizers",
-      "REST APIs for registrations, user data and event workflows",
+      "A team portal with member details, photo uploads and downloadable QR ID cards",
+      "Accommodation requests and certificate-detail checks for teams",
+      "Admin dashboards for organizers, backed by REST APIs",
       "Deployment, testing and upkeep with the organizers through the live event",
     ],
     stack: "React, Node.js, Express, Tailwind CSS",
+  },
+  examforge: {
+    name: "ExamForge",
+    kind: "Role-based online examination platform",
+    year: "2026",
+    role: "Full-stack developer",
+    url: "https://examforge-frountend.vercel.app/",
+    urlLabel: "examforge-frountend.vercel.app",
+    summary:
+      "ExamForge runs online exams from question bank to result. Examiners build and publish exams, students take them in a focused workspace, and scores are calculated the moment an attempt is submitted. Admins, examiners and students each get their own workspace.",
+    built: [
+      "Separate workspaces for admins, examiners and students",
+      "Question bank and exam publishing for examiners",
+      "Room-code entry, so students can take common exams without an account",
+      "Instant scoring when an attempt is submitted",
+      "A FastAPI and PostgreSQL backend, with a React frontend that talks to it through plain fetch",
+    ],
+    stack: "React, Vite, Tailwind CSS, FastAPI, PostgreSQL",
   },
   techno: {
     name: "Techno Vision",
@@ -63,8 +81,8 @@ export const stackItems = [
   {
     name: "React",
     group: "Web",
-    note: "The front end of AVISHKAAR: the public event pages, registration and the organizer dashboards.",
-    link: { label: "Try the AVISHKAAR sketch", href: "#work" },
+    note: "The front end of AVISHKAAR and ExamForge: event pages, team portals, exam workspaces and dashboards.",
+    link: { label: "Try the sketches", href: "#work" },
   },
   {
     name: "Node.js",
@@ -79,6 +97,12 @@ export const stackItems = [
     link: { label: "See the API tab", href: "#work" },
   },
   {
+    name: "FastAPI",
+    group: "Web",
+    note: "The backend of ExamForge: the APIs for exams, attempts and instant scoring, with role-based access.",
+    link: { label: "Try the ExamForge sketch", href: "#work" },
+  },
+  {
     name: "MongoDB",
     group: "Web",
     note: "The M in the MERN stack I work in, and the document-database half of my full-stack skills.",
@@ -91,7 +115,7 @@ export const stackItems = [
   {
     name: "Tailwind CSS",
     group: "Web",
-    note: "How I style responsive interfaces. It's part of the AVISHKAAR build.",
+    note: "How I style responsive interfaces, on AVISHKAAR and ExamForge.",
     link: { label: "Resize the Techno Vision site", href: "#work" },
   },
   {
@@ -102,7 +126,7 @@ export const stackItems = [
   {
     name: "Python",
     group: "Languages",
-    note: "One of my core programming languages, from my degree and problem solving.",
+    note: "One of my core programming languages, from my degree and problem solving. It is also the language behind the ExamForge backend.",
   },
   {
     name: "Java",
@@ -121,9 +145,15 @@ export const stackItems = [
     note: "Part of my core programming set, alongside C, for data structures and problem solving.",
   },
   {
+    name: "PostgreSQL",
+    group: "Database",
+    note: "The database behind ExamForge, storing exams, questions, attempts and users.",
+    link: { label: "Try the ExamForge sketch", href: "#work" },
+  },
+  {
     name: "MySQL",
     group: "Database",
-    note: "My relational database skill, next to MongoDB on the document side.",
+    note: "My relational database skill, next to PostgreSQL and MongoDB.",
   },
   {
     name: "AWS",
